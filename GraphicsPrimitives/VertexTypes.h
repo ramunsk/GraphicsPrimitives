@@ -17,6 +17,16 @@ struct VertexType
 {
 	D3DXVECTOR3 position;
 	D3DXVECTOR4 color;
+
+	VertexType()
+	{
+	};
+	
+	VertexType(FLOAT _x, FLOAT _y, FLOAT _z, D3DXVECTOR4 _color)
+	{
+		position = D3DXVECTOR3(_x, _y, _z);
+		color = _color;
+	}
 };
 /*
 struct VertexType
