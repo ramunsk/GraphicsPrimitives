@@ -6,7 +6,7 @@
 
 TransformationClass::TransformationClass()
 {
-	m_position = D3DXVECTOR3(0.0f, 0.0f, -10.0f);
+	m_position = D3DXVECTOR3(0.0f, 0.0f, -200.0f);
 	m_target = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	m_upv = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
 
@@ -29,7 +29,7 @@ TransformationClass::~TransformationClass()
 
 void TransformationClass::Initialize(HWND hwnd)
 {
-	m_screenDepth = 1000.0f;
+	m_screenDepth = 2000.0f;
 	m_screenNear = 1.0f;
 
 	//Obtain window dimensions from the haddle

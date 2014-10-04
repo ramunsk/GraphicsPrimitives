@@ -8,7 +8,8 @@ GraphicsClass::GraphicsClass()
 {
 	m_D3D = 0;
 	m_Transform = 0;
-	m_Triangle = 0;
+	//m_Triangle = 0;
+	m_Arrow = 0;
 	m_TrivialShader = 0;
 }
 
@@ -53,20 +54,20 @@ bool GraphicsClass::Initialize(HWND hwnd)
 
 	m_Transform->Initialize(hwnd);
 	// Set the initial position of the camera.
-	m_Transform->SetCameraPosition(D3DXVECTOR3(0.0f, 0.0f, -10.0f));
+	m_Transform->SetCameraPosition(D3DXVECTOR3(-800.0f, -800.0f, 0.0f));
 	m_Transform->SetCameraTarget(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
-	m_Transform->SetCameraUPV(D3DXVECTOR3(0.0f, 1.0f, 0.0f));
+	m_Transform->SetCameraUPV(D3DXVECTOR3(0.0f, 2.0f, 0.0f));
 
 	// Create the model object.
-	m_Triangle = new TriangleModelClass;
-	if (!m_Triangle)
+	m_Arrow = new ArrowModelClass;
+	if (!m_Arrow)
 	{
 		MessageBox(hwnd, L"Could not create the model object.", L"Error", MB_OK);
 		return false;
 	}
 
 	// Initialize the model object.
-	result = m_Triangle->Initialize(m_D3D->GetDevice());
+	result = m_Arrow->Initialize(m_D3D->GetDevice());
 	if (!result)
 	{
 		MessageBox(hwnd, L"Could not initialize the model object.", L"Error", MB_OK);
@@ -104,11 +105,11 @@ void GraphicsClass::Shutdown()
 	}
 
 	// Release the model object.
-	if (m_Triangle)
+	if (m_Arrow)
 	{
-		m_Triangle->Shutdown();
-		delete m_Triangle;
-		m_Triangle = 0;
+		m_Arrow->Shutdown();
+		delete m_Arrow;
+		m_Arrow = 0;
 	}
 
 	// Release the camera object.
@@ -156,7 +157,7 @@ bool GraphicsClass::Render()
 	projectionMatrix = m_Transform->GetProjectionMatrix();
 
 	// Get the world matrix of the triangle.
-	worldMatrix = m_Triangle->GetModelWorldMatrix();
+	worldMatrix = m_Arrow->GetModelWorldMatrix();
 	// Update parameters of the trivial shader.
 	result = m_TrivialShader->Render(m_D3D->GetDeviceContext(), worldMatrix, viewMatrix, projectionMatrix);
 	if (!result)
@@ -164,7 +165,7 @@ bool GraphicsClass::Render()
 		return false;
 	}
 	// Put the model vertex and index buffers on the graphics pipeline and draw primitives.
-	m_Triangle->Render(m_D3D->GetDeviceContext());
+	m_Arrow->Render(m_D3D->GetDeviceContext());
 
 	// Present the rendered scene to the screen.
 	m_D3D->EndScene();

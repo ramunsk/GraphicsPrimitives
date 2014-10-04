@@ -10,7 +10,8 @@
 ///////////////////////
 #include "d3dclass.h"
 #include "transformationclass.h"
-#include "trianglemodelclass.h"
+//#include "trianglemodelclass.h"
+#include "ArrowModelClass.h"
 #include "trivialshaderclass.h"
 
 /////////////
@@ -40,7 +41,8 @@ private:
 private:
 	D3DClass* m_D3D;
 	TransformationClass* m_Transform;
-	TriangleModelClass* m_Triangle;
+	//TriangleModelClass* m_Triangle;
+	ArrowModelClass* m_Arrow;
 	TrivialShaderClass* m_TrivialShader;
 };
 

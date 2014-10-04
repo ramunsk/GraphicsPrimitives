@@ -1,4 +1,5 @@
 #include "ArrowModelClass.h"
+#include <vector>
 
 ArrowModelClass::ArrowModelClass() :IndexModelClass()
 {
@@ -12,17 +13,27 @@ bool ArrowModelClass::InitializeBuffers(ID3D11Device* device)
 {
 	HRESULT result;
 
+	///
+	/// VERTICES
+	///
 	D3DXVECTOR4 COLOR_WHITE =      { 1.0f, 1.0f, 1.0f, 1.0f };
-	D3DXVECTOR4 COLOR_LIGHT_GRAY = { 0.9f, 0.9f, 0.9f, 1.0f };
+	D3DXVECTOR4 COLOR_LIGHT_GRAY = { 0.6f, 0.6f, 0.6f, 1.0f };
 
-	VertexType* vertices = new VertexType[]
-	{
-		{-378.0f,   0.0f, 378.0f, COLOR_WHITE},       // 0
-		{-343.0f, -15.0f, 343.0f, COLOR_LIGHT_GRAY},  // 1
-		{-342.0f,  -2.0f, 344.0f, COLOR_LIGHT_GRAY}   // 2
+	std::vector<VertexType> vertices = {
+		// Antgalis
+		{ -378.0f,   0.0f, 378.0f, COLOR_WHITE },        // 0
+		{ -343.0f, -15.0f, 343.0f, COLOR_LIGHT_GRAY },   // 1
+		{ -342.0f,  -2.0f, 344.0f, COLOR_LIGHT_GRAY },   // 2
+		{ -332.0f,   0.0f, 354.0f, COLOR_LIGHT_GRAY },   // 3
+		{ -341.0f,   2.0f, 344.0f, COLOR_LIGHT_GRAY },   // 4
+		{ -343.0f,  15.0f, 343.0f, COLOR_LIGHT_GRAY },   // 5
+		{ -344.0f,   2.0f, 342.0f, COLOR_LIGHT_GRAY },   // 6
+		{ -354.0f,   0.0f, 332.0f, COLOR_LIGHT_GRAY },   // 7
+		{ -344.0f,  -2.0f, 341.0f, COLOR_LIGHT_GRAY },   // 8
+
 	};
 
-	int vertexCount = sizeof(vertices) / sizeof(vertices[0]);
+	int vertexCount = vertices.size();
 	SetVertexCount(vertexCount);
 
 	D3D11_BUFFER_DESC vertexBufferDesc;
@@ -35,7 +46,7 @@ bool ArrowModelClass::InitializeBuffers(ID3D11Device* device)
 
 	D3D11_SUBRESOURCE_DATA vertexData;
 	ZeroMemory(&vertexData, sizeof(vertexData));
-	vertexData.pSysMem = vertices;
+	vertexData.pSysMem = &vertices[0];
 	vertexData.SysMemPitch = 0;
 	vertexData.SysMemSlicePitch = 0;
 
@@ -45,38 +56,38 @@ bool ArrowModelClass::InitializeBuffers(ID3D11Device* device)
 		return false;
 	}
 
-	delete[] vertices;
-	vertices = 0;
+	///
+	/// INDICES
+	///
+	std::vector<unsigned long> indices = {
+		// Antaglis
+		0, 2, 1,
+		0, 2, 3,
+		0, 3, 4,
+		0, 4, 5,
+		0, 5, 6,
+		0, 6, 7,
+		0, 7, 8,
+		1,8,2,
+		2,4,3,
+		4,6,5,
+		7,6,8
 
-	unsigned long* indices;
+	};
+
+	int indexCount = indices.size();
+	SetIndexCount(indexCount);
+
 	D3D11_BUFFER_DESC indexBufferDesc;
-	D3D11_SUBRESOURCE_DATA indexData;
-
-	// Set the number of indices in the index array.
-	int iCount = 3;
-	SetIndexCount(iCount);
-
-	// Create the index array.
-	indices = new unsigned long[iCount];
-	if (!indices)
-	{
-		return false;
-	}
-	// Load the index array with data.
-	indices[0] = 0;
-	indices[1] = 1;
-	indices[2] = 2;
-
-	// Set up the description of the static index buffer.
 	indexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
-	indexBufferDesc.ByteWidth = sizeof(unsigned long) * iCount;
+	indexBufferDesc.ByteWidth = sizeof(unsigned long) * indexCount;
 	indexBufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
 	indexBufferDesc.CPUAccessFlags = 0;
 	indexBufferDesc.MiscFlags = 0;
 	indexBufferDesc.StructureByteStride = 0;
 
-	// Give the subresource structure a pointer to the index data.
-	indexData.pSysMem = indices;
+	D3D11_SUBRESOURCE_DATA indexData;
+	indexData.pSysMem = &indices[0];
 	indexData.SysMemPitch = 0;
 	indexData.SysMemSlicePitch = 0;
 
@@ -86,10 +97,6 @@ bool ArrowModelClass::InitializeBuffers(ID3D11Device* device)
 	{
 		return false;
 	}
-
-	// Release the array now that the vertex buffer has been created and loaded.
-	delete[] indices;
-	indices = 0;
 
 	return true;
 }
@@ -121,9 +128,10 @@ void ArrowModelClass::RenderBuffers(ID3D11DeviceContext* deviceContext)
 void ArrowModelClass::Render(ID3D11DeviceContext* deviceContext)
 {
 	//Update the world transformations
-	UINT  iTime = timeGetTime() % 2000;
-	float fAngle = iTime * 2 * D3DX_PI / 2000.0f;
+	UINT  iTime = timeGetTime() % 8000;
+	float fAngle = iTime * 2 * D3DX_PI / 8000.0f;
 	D3DXMATRIX rotMatrix;
+	//D3DXMatrixRotationY(&rotMatrix, fAngle);
 	D3DXMatrixRotationY(&rotMatrix, fAngle);
 	//D3DXMatrixRotationAxis(&rotMatrix, 1.0f, 1.0f,1.0f, fAngle );
 	SetModelWorldMatrix(rotMatrix);
