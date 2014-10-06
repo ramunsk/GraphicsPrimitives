@@ -16,8 +16,10 @@ bool ArrowModelClass::InitializeBuffers(ID3D11Device* device)
 	///
 	/// VERTICES
 	///
-	D3DXVECTOR4 COLOR_WHITE =      { 1.0f, 1.0f, 1.0f, 1.0f };
-	D3DXVECTOR4 COLOR_LIGHT_GRAY = { 0.6f, 0.6f, 0.6f, 1.0f };
+	D3DXVECTOR4 COLOR_WHITE =      { 1.00f, 1.00f, 1.00f, 1.0f };
+	D3DXVECTOR4 COLOR_LIGHT_GRAY = { 0.60f, 0.60f, 0.60f, 1.0f };
+	D3DXVECTOR4 COLOR_BLUE =       { 0.15f, 0.02f, 0.94f, 1.0f };
+	
 
 	std::vector<VertexType> vertices = {
 		// Antgalis
@@ -30,6 +32,24 @@ bool ArrowModelClass::InitializeBuffers(ID3D11Device* device)
 		{ -344.0f,   2.0f, 342.0f, COLOR_LIGHT_GRAY },   // 6
 		{ -354.0f,   0.0f, 332.0f, COLOR_LIGHT_GRAY },   // 7
 		{ -344.0f,  -2.0f, 341.0f, COLOR_LIGHT_GRAY },   // 8
+		// Laikiklis
+		{ -340.0f,  -4.0f, 346.0f, COLOR_BLUE },   // 9
+		{ -326.0f,  -4.0f, 332.0f, COLOR_BLUE },   // 10
+		{ -339.0f,   0.0f, 347.0f, COLOR_BLUE },   // 11
+		{ -325.0f,   0.0f, 333.0f, COLOR_BLUE },   // 12
+		{ -340.0f,   4.0f, 346.0f, COLOR_BLUE },   // 13
+		{ -326.0f,   4.0f, 332.0f, COLOR_BLUE },   // 14
+		{ -343.0f,   6.0f, 343.0f, COLOR_BLUE },   // 15
+		{ -329.0f,   6.0f, 329.0f, COLOR_BLUE },   // 16
+		{ -346.0f,   4.0f, 340.0f, COLOR_BLUE },   // 17
+		{ -332.0f,   4.0f, 326.0f, COLOR_BLUE },   // 18
+		{ -347.0f,   0.0f, 339.0f, COLOR_BLUE },   // 19
+		{ -333.0f,   0.0f, 325.0f, COLOR_BLUE },   // 20
+
+
+
+
+
 
 	};
 
@@ -68,10 +88,21 @@ bool ArrowModelClass::InitializeBuffers(ID3D11Device* device)
 		0, 5, 6,
 		0, 6, 7,
 		0, 7, 8,
-		1,8,2,
-		2,4,3,
-		4,6,5,
-		7,6,8
+		1, 8, 2,
+		2, 4, 3,
+		4, 6, 5,
+		7, 6, 8,
+		// Laikiklis
+		9,  10, 11,
+		11, 10, 12,
+		11, 12, 13,
+		13, 12, 14,
+		13, 14, 15,
+		15, 14, 16,
+		16, 17, 18,
+		17, 16, 18,
+		17, 18, 19,
+		19, 18, 20
 
 	};
 
