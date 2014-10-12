@@ -16,9 +16,11 @@ bool ArrowModelClass::InitializeBuffers(ID3D11Device* device)
 	///
 	/// VERTICES
 	///
-	D3DXVECTOR4 COLOR_WHITE =      { 1.00f, 1.00f, 1.00f, 1.0f };
-	D3DXVECTOR4 COLOR_LIGHT_GRAY = { 0.60f, 0.60f, 0.60f, 1.0f };
-	D3DXVECTOR4 COLOR_BLUE =       { 0.15f, 0.02f, 0.94f, 1.0f };
+	D3DXVECTOR4 COLOR_WHITE =       { 1.00f, 1.00f, 1.00f, 1.0f };
+	D3DXVECTOR4 COLOR_LIGHT_GRAY =  { 0.60f, 0.60f, 0.60f, 1.0f };
+	D3DXVECTOR4 COLOR_BLUE =        { 0.15f, 0.02f, 0.94f, 1.0f };
+	D3DXVECTOR4 COLOR_LIGHT_BROWN = { 0.71f, 0.31f, 0.04f, 1.0f };
+	D3DXVECTOR4 COLOR_DARK_BROWN =  { 0.68f, 0.30f, 0.01f, 1.0f };
 	
 
 	std::vector<VertexType> vertices = {
@@ -49,8 +51,23 @@ bool ArrowModelClass::InitializeBuffers(ID3D11Device* device)
 		{ -333.0f,  0.0f, 325.0f, COLOR_BLUE },	// 22
 		{ -346.0f, -4.0f, 340.0f, COLOR_BLUE },	// 23
 		{ -332.0f, -4.0f, 326.0f, COLOR_BLUE },	// 24
-
-
+		// Kotas
+		{ -329.0f, -5.0f,  329.0f, COLOR_LIGHT_BROWN }, // 25
+		{  378.0f, -5.0f, -378.0f, COLOR_DARK_BROWN  }, // 26
+		{ -326.0f, -4.0f,  331.0f, COLOR_LIGHT_BROWN }, // 27
+		{  381.0f, -4.0f, -376.0f, COLOR_DARK_BROWN  }, // 28
+		{ -325.0f,  0.0f,  332.0f, COLOR_LIGHT_BROWN }, // 29
+		{  382.0f,  0.0f, -375.0f, COLOR_DARK_BROWN  }, // 30
+		{ -326.0f,  4.0f,  331.0f, COLOR_LIGHT_BROWN }, // 31
+		{  381.0f,  4.0f, -376.0f, COLOR_DARK_BROWN  }, // 32
+		{ -329.0f,  5.0f,  329.0f, COLOR_LIGHT_BROWN }, // 33
+		{  378.0f,  5.0f, -378.0f, COLOR_DARK_BROWN  }, // 34
+		{ -331.0f,  4.0f,  326.0f, COLOR_LIGHT_BROWN }, // 35
+		{  376.0f,  4.0f, -381.0f, COLOR_DARK_BROWN  }, // 36
+		{ -332.0f,  0.0f,  325.0f, COLOR_LIGHT_BROWN }, // 37
+		{  375.0f,  0.0f, -382.0f, COLOR_DARK_BROWN  }, // 38
+		{ -331.0f, -4.0f,  326.0f, COLOR_LIGHT_BROWN }, // 39
+		{  376.0f, -4.0f, -381.0f, COLOR_DARK_BROWN  }, // 40
 
 
 
@@ -128,6 +145,35 @@ bool ArrowModelClass::InitializeBuffers(ID3D11Device* device)
 		22, 10, 24,
 		10, 22, 18,
 		10, 18, 14,
+		// Kotas
+		25, 26, 27,
+		27, 26, 28,
+		27, 28, 29,
+		29, 28, 30,
+		29, 30, 31,
+		31, 30, 32,
+		31, 32, 33,
+		33, 32, 34,
+		33, 34, 35,
+		35, 34, 36,
+		35, 36, 37,
+		37, 36, 38,
+		37, 38, 39,
+		39, 38, 40,
+		39, 40, 25,
+		25, 40, 26,
+		25, 27, 29, //
+		29, 31, 33,
+		33, 35, 37, 
+		37, 39, 25,
+		25, 29, 33,
+		25, 33, 37,
+		26, 30, 28, //
+		30, 34, 32, 
+		34, 38, 36, 
+		38, 26, 40,
+		26, 38, 34, 
+		26, 34, 30,
 
 		
 
