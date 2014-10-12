@@ -54,7 +54,7 @@ bool GraphicsClass::Initialize(HWND hwnd)
 
 	m_Transform->Initialize(hwnd);
 	// Set the initial position of the camera.
-	m_Transform->SetCameraPosition(D3DXVECTOR3(0.0f, 0.0f, -800.0f));
+	m_Transform->SetCameraPosition(D3DXVECTOR3(0.0f, 0.0f, -1200.0f));
 	m_Transform->SetCameraTarget(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 	m_Transform->SetCameraUPV(D3DXVECTOR3(0.0f, 2.0f, 0.0f));
 
