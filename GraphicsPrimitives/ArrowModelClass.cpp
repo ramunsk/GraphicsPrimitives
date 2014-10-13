@@ -20,54 +20,73 @@ bool ArrowModelClass::InitializeBuffers(ID3D11Device* device)
 	D3DXVECTOR4 COLOR_LIGHT_GRAY =  { 0.60f, 0.60f, 0.60f, 1.0f };
 	D3DXVECTOR4 COLOR_BLUE =        { 0.15f, 0.02f, 0.94f, 1.0f };
 	D3DXVECTOR4 COLOR_LIGHT_BROWN = { 0.71f, 0.31f, 0.04f, 1.0f };
-	D3DXVECTOR4 COLOR_DARK_BROWN =  { 0.68f, 0.30f, 0.01f, 1.0f };
+	D3DXVECTOR4 COLOR_DARK_BROWN = { 0.68f, 0.30f, 0.01f, 1.0f };
+	D3DXVECTOR4 COLOR_RED = { 0.4f, 0.0f, 0.00f, 1.0f };
+	D3DXVECTOR4 COLOR_ORANGE = { 1.0f, 0.4f, 0.00f, 1.0f };
 	
 
 	std::vector<VertexType> vertices = {
 		// Antgalis
-		{ -378.0f,   0.0f, 378.0f, COLOR_WHITE },       // 0
-		{ -343.0f, -15.0f, 343.0f, COLOR_LIGHT_GRAY },	// 1
-		{ -342.0f,  -2.0f, 344.0f, COLOR_LIGHT_GRAY },	// 2
-		{ -332.0f,  -0.0f, 354.0f, COLOR_LIGHT_GRAY },	// 3
-		{ -341.0f,   2.0f, 344.0f, COLOR_LIGHT_GRAY },	// 4
-		{ -343.0f,  15.0f, 343.0f, COLOR_LIGHT_GRAY },	// 5
-		{ -344.0f,   2.0f, 342.0f, COLOR_LIGHT_GRAY },	// 6
-		{ -354.0f,   0.0f, 332.0f, COLOR_LIGHT_GRAY },	// 7
-		{ -344.0f,  -2.0f, 341.0f, COLOR_LIGHT_GRAY },	// 8
+		{ -378.0f, 378.0f, 0.0f, COLOR_WHITE },       // 0
+		{ -343.0f, 343.0f, -15.0f, COLOR_LIGHT_GRAY },	// 1
+		{ -342.0f, 344.0f, -2.0f, COLOR_LIGHT_GRAY },	// 2
+		{ -332.0f, 354.0f, -0.0f, COLOR_LIGHT_GRAY },	// 3
+		{ -341.0f, 344.0f, 2.0f, COLOR_LIGHT_GRAY },	// 4
+		{ -343.0f, 343.0f, 15.0f, COLOR_LIGHT_GRAY },	// 5
+		{ -344.0f, 342.0f, 2.0f, COLOR_LIGHT_GRAY },	// 6
+		{ -354.0f, 332.0f, 0.0f, COLOR_LIGHT_GRAY },	// 7
+		{ -344.0f, 341.0f, -2.0f, COLOR_LIGHT_GRAY },	// 8
 		// Laikiklis
-		{ -343.0f, -6.0f, 343.0f, COLOR_BLUE }, // 9
-		{ -329.0f, -6.0f, 329.0f, COLOR_BLUE },	// 10
-		{ -340.0f, -4.0f, 346.0f, COLOR_BLUE },	// 11
-		{ -326.0f, -4.0f, 332.0f, COLOR_BLUE },	// 12
-		{ -339.0f,  0.0f, 347.0f, COLOR_BLUE },	// 13
-		{ -325.0f,  0.0f, 333.0f, COLOR_BLUE },	// 14
-		{ -340.0f,  4.0f, 346.0f, COLOR_BLUE },	// 15
-		{ -326.0f,  4.0f, 332.0f, COLOR_BLUE },	// 16
-		{ -343.0f,  6.0f, 343.0f, COLOR_BLUE },	// 17
-		{ -329.0f,  6.0f, 329.0f, COLOR_BLUE },	// 18
-		{ -346.0f,  4.0f, 340.0f, COLOR_BLUE },	// 19
-		{ -332.0f,  4.0f, 326.0f, COLOR_BLUE },	// 20
-		{ -347.0f,  0.0f, 339.0f, COLOR_BLUE },	// 21
-		{ -333.0f,  0.0f, 325.0f, COLOR_BLUE },	// 22
-		{ -346.0f, -4.0f, 340.0f, COLOR_BLUE },	// 23
-		{ -332.0f, -4.0f, 326.0f, COLOR_BLUE },	// 24
+		{ -343.0f, 343.0f, -6.0f, COLOR_BLUE }, // 9
+		{ -329.0f, 329.0f, -6.0f, COLOR_BLUE },	// 10
+		{ -340.0f, 346.0f, -4.0f, COLOR_BLUE },	// 11
+		{ -326.0f, 332.0f, -4.0f, COLOR_BLUE },	// 12
+		{ -339.0f, 347.0f, 0.0f, COLOR_BLUE },	// 13
+		{ -325.0f, 333.0f, 0.0f, COLOR_BLUE },	// 14
+		{ -340.0f, 346.0f, 4.0f, COLOR_BLUE },	// 15
+		{ -326.0f, 332.0f, 4.0f, COLOR_BLUE },	// 16
+		{ -343.0f, 343.0f, 6.0f, COLOR_BLUE },	// 17
+		{ -329.0f, 329.0f, 6.0f, COLOR_BLUE },	// 18
+		{ -346.0f, 340.0f, 4.0f, COLOR_BLUE },	// 19
+		{ -332.0f, 326.0f, 4.0f, COLOR_BLUE },	// 20
+		{ -347.0f, 339.0f, 0.0f, COLOR_BLUE },	// 21
+		{ -333.0f, 325.0f, 0.0f, COLOR_BLUE },	// 22
+		{ -346.0f, 340.0f, -4.0f, COLOR_BLUE },	// 23
+		{ -332.0f, 326.0f, -4.0f, COLOR_BLUE },	// 24
 		// Kotas
-		{ -329.0f, -5.0f,  329.0f, COLOR_LIGHT_BROWN }, // 25
-		{  378.0f, -5.0f, -378.0f, COLOR_DARK_BROWN  }, // 26
-		{ -326.0f, -4.0f,  331.0f, COLOR_LIGHT_BROWN }, // 27
-		{  381.0f, -4.0f, -376.0f, COLOR_DARK_BROWN  }, // 28
-		{ -325.0f,  0.0f,  332.0f, COLOR_LIGHT_BROWN }, // 29
-		{  382.0f,  0.0f, -375.0f, COLOR_DARK_BROWN  }, // 30
-		{ -326.0f,  4.0f,  331.0f, COLOR_LIGHT_BROWN }, // 31
-		{  381.0f,  4.0f, -376.0f, COLOR_DARK_BROWN  }, // 32
-		{ -329.0f,  5.0f,  329.0f, COLOR_LIGHT_BROWN }, // 33
-		{  378.0f,  5.0f, -378.0f, COLOR_DARK_BROWN  }, // 34
-		{ -331.0f,  4.0f,  326.0f, COLOR_LIGHT_BROWN }, // 35
-		{  376.0f,  4.0f, -381.0f, COLOR_DARK_BROWN  }, // 36
-		{ -332.0f,  0.0f,  325.0f, COLOR_LIGHT_BROWN }, // 37
-		{  375.0f,  0.0f, -382.0f, COLOR_DARK_BROWN  }, // 38
-		{ -331.0f, -4.0f,  326.0f, COLOR_LIGHT_BROWN }, // 39
-		{  376.0f, -4.0f, -381.0f, COLOR_DARK_BROWN  }, // 40
+		{ -329.0f, 329.0f, -5.0f, COLOR_LIGHT_BROWN }, // 25
+		{ 378.0f, -378.0f, -5.0f, COLOR_DARK_BROWN }, // 26
+		{ -326.0f, 331.0f, -4.0f, COLOR_LIGHT_BROWN }, // 27
+		{ 381.0f, -376.0f, -4.0f, COLOR_DARK_BROWN }, // 28
+		{ -325.0f, 332.0f, 0.0f, COLOR_LIGHT_BROWN }, // 29
+		{ 382.0f, -375.0f, 0.0f, COLOR_DARK_BROWN }, // 30
+		{ -326.0f, 331.0f, 4.0f, COLOR_LIGHT_BROWN }, // 31
+		{ 381.0f, -376.0f, 4.0f, COLOR_DARK_BROWN }, // 32
+		{ -329.0f, 329.0f, 5.0f, COLOR_LIGHT_BROWN }, // 33
+		{ 378.0f, -378.0f, 5.0f, COLOR_DARK_BROWN }, // 34
+		{ -331.0f, 326.0f, 4.0f, COLOR_LIGHT_BROWN }, // 35
+		{ 376.0f, -381.0f, 4.0f, COLOR_DARK_BROWN }, // 36
+		{ -332.0f, 325.0f, 0.0f, COLOR_LIGHT_BROWN }, // 37
+		{ 375.0f, -382.0f, 0.0f, COLOR_DARK_BROWN }, // 38
+		{ -331.0f, 326.0f, -4.0f, COLOR_LIGHT_BROWN }, // 39
+		{ 376.0f, -381.0f, -4.0f, COLOR_DARK_BROWN }, // 40
+		// Plunksnos 1
+		{ 273.0f, -271.0f, -4.0f, COLOR_RED },    // 41
+		{ 291.0f, -289.0f, -5.0f, COLOR_RED },    // 42 
+		{ 292.0f, -288.0f, -4.0f, COLOR_RED },    // 43
+		{ 302.0f, -292.0f, -18.0f, COLOR_ORANGE }, // 44
+		{ 291.0f, -289.0f, -4.0f, COLOR_RED }, // 45
+		{ 308.0f, -307.0f, -5.0f, COLOR_RED }, // 46
+		{ 310.0f, -306.0f, -4.0f, COLOR_RED }, // 47
+		{ 320.0f, -309.0f, -18.0f, COLOR_ORANGE }, // 48
+		{ 309.0f, -306.0f, -4.0f, COLOR_RED }, // 49
+		{ 326.0f, -325.0f, -5.0f, COLOR_RED }, // 50
+		{ 327.0f, -323.0f, -4.0f, COLOR_RED }, // 51
+		{ 338.0f, -327.0f, -18.0f, COLOR_ORANGE }, // 52
+		{ 327.0f, -324.0f, -4.0f, COLOR_RED }, // 53
+		{ 344.0f, -342.0f, -5.0f, COLOR_RED }, // 54
+		{ 345.0f, -341.0f, -4.0f, COLOR_RED }, // 55
+		{ 355.0f, -345.0f, -18.0f, COLOR_ORANGE }, // 56
 
 
 
@@ -174,6 +193,23 @@ bool ArrowModelClass::InitializeBuffers(ID3D11Device* device)
 		38, 26, 40,
 		26, 38, 34, 
 		26, 34, 30,
+		// Plunksnos 1
+		41, 43, 42,
+		42, 43, 44,
+		41, 44, 43,
+		41, 42, 44,
+		45, 47, 46, //
+		46, 47, 48,
+		45, 48, 47,
+		45, 46, 48,
+		49, 51, 50, //
+		50, 51, 52,
+		49, 52, 51,
+		49, 50, 52,
+		53, 55, 54, //
+		54, 55, 56,
+		53, 56, 55,
+		53, 54, 56,
 
 		
 
