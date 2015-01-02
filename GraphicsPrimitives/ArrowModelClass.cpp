@@ -1,9 +1,12 @@
 #include "ArrowModelClass.h"
 #include <vector>
+#include <ctime>
 
 ArrowModelClass::ArrowModelClass() :IndexModelClass()
 {
+    float scaleFactor = 0.01f;
     D3DXMatrixRotationZ(&_staticRotation, D3DXToRadian(-45.0f));
+    D3DXMatrixScaling(&_staticScale, scaleFactor, scaleFactor, scaleFactor);
 }
 
 ArrowModelClass::~ArrowModelClass()
@@ -379,11 +382,14 @@ void ArrowModelClass::Render(ID3D11DeviceContext* deviceContext)
 	//D3DXMatrixRotationY(&rotMatrix, fAngle);
 	D3DXMatrixRotationY(&rotMatrix, fAngle);
 	//D3DXMatrixRotationAxis(&rotMatrix, 1.0f, 1.0f,1.0f, fAngle );
-    SetModelWorldMatrix(_staticRotation * rotMatrix);
+    SetModelWorldMatrix(_staticRotation * rotMatrix * _staticScale);
 	//SetModelWorldMatrix(XMMatrixIdentity());
 
 	// Put the vertex and index buffers on the graphics pipeline to prepare them for drawing.
 	RenderBuffers(deviceContext);
+
+    time_t t;
+    time(&t);
 
 	return;
 }
