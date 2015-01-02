@@ -20,5 +20,26 @@ private:
 
     D3DXMATRIX _staticRotation;
     D3DXMATRIX _staticScale;
+
+    UINT lastRender;
+    UINT ellapsed;
+
+    float scaleFraction;
+    float scaleCurrent;
+    float scaleDirection;
+    void CalcScaleTransform(D3DXMATRIX*);
+
+    float yFraction;
+    float yCurrent;
+    float yDirection;
+    float zFraction;
+    float zCurrent;
+    float zDirection;
+    void CalcTranslateTransform(D3DXMATRIX*);
+
+    float rFraction;
+    float rCurrent;
+    float rDirection;
+    void CalcRotateTransform(D3DXMATRIX*);
    
 };

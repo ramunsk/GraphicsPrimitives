@@ -2,11 +2,43 @@
 #include <vector>
 #include <ctime>
 
+#define CYCLE_LENGTH 2000.0f
+
+#define SCALE_MIN 1.0f
+#define SCALE_MAX 3.0f
+
+#define Y_MIN -4.0f
+#define Y_MAX  4.0f
+#define Z_MIN -2.0f
+#define Z_MAX  2.0f
+
+#define R_MIN -90.0f
+#define R_MAX 180.0f
+
 ArrowModelClass::ArrowModelClass() :IndexModelClass()
 {
+    
     float scaleFactor = 0.01f;
     D3DXMatrixRotationZ(&_staticRotation, D3DXToRadian(-45.0f));
     D3DXMatrixScaling(&_staticScale, scaleFactor, scaleFactor, scaleFactor);
+
+    lastRender = 0;
+    ellapsed = 1;
+
+    scaleCurrent = SCALE_MIN;
+    scaleFraction = (SCALE_MAX - SCALE_MIN) / CYCLE_LENGTH;
+    scaleDirection = 1.0f;
+
+    yCurrent = Y_MIN;
+    yFraction = (Y_MAX - Y_MIN) / CYCLE_LENGTH;
+    yDirection = 1.0f;
+    zCurrent = Z_MIN;
+    zFraction = (Z_MAX - Z_MIN) / CYCLE_LENGTH;
+    zDirection = 1.0f;
+
+    rCurrent = R_MIN;
+    rFraction = (R_MAX - R_MIN) / CYCLE_LENGTH;
+    rDirection = 1.0f;
 }
 
 ArrowModelClass::~ArrowModelClass()
@@ -376,20 +408,72 @@ void ArrowModelClass::RenderBuffers(ID3D11DeviceContext* deviceContext)
 void ArrowModelClass::Render(ID3D11DeviceContext* deviceContext)
 {
 	//Update the world transformations
-	UINT  iTime = timeGetTime() % 8000;
-	float fAngle = iTime * 2 * D3DX_PI / 8000.0f;
-	D3DXMATRIX rotMatrix;
+	//UINT  iTime = timeGetTime();
+	//float fAngle = iTime * 2 * D3DX_PI / 8000.0f;
+	//D3DXMATRIX rotMatrix;
 	//D3DXMatrixRotationY(&rotMatrix, fAngle);
-	D3DXMatrixRotationY(&rotMatrix, fAngle);
+	//D3DXMatrixRotationY(&rotMatrix, fAngle);
 	//D3DXMatrixRotationAxis(&rotMatrix, 1.0f, 1.0f,1.0f, fAngle );
-    SetModelWorldMatrix(_staticRotation * rotMatrix * _staticScale);
-	//SetModelWorldMatrix(XMMatrixIdentity());
+  
+
+    UINT now = timeGetTime();
+    if (lastRender == 0){
+        lastRender = now - 1;
+    }
+    ellapsed = now - lastRender;
+
+    D3DXMATRIX scaleMatrix;
+    D3DXMATRIX translateMatrix;
+    D3DXMATRIX rotationMatrix;
+
+    CalcScaleTransform(&scaleMatrix);
+    CalcTranslateTransform(&translateMatrix);
+    CalcRotateTransform(&rotationMatrix);
+    
+    SetModelWorldMatrix(_staticRotation * rotationMatrix * _staticScale * scaleMatrix * translateMatrix);
 
 	// Put the vertex and index buffers on the graphics pipeline to prepare them for drawing.
 	RenderBuffers(deviceContext);
 
-    time_t t;
-    time(&t);
+    lastRender = now;
+
 
 	return;
+}
+
+void ArrowModelClass::CalcScaleTransform(D3DXMATRIX *m)
+{
+    if (scaleCurrent <= SCALE_MIN) scaleDirection =  1.0f;
+    if (scaleCurrent >= SCALE_MAX) scaleDirection = -1.0f;
+ 
+    scaleCurrent += scaleFraction * scaleDirection * ellapsed;
+    
+    D3DXMatrixScaling(m, scaleCurrent, scaleCurrent, scaleCurrent);
+    //D3DXMatrixIdentity(m);
+}
+
+void ArrowModelClass::CalcTranslateTransform(D3DXMATRIX *m)
+{
+   if (yCurrent <= Y_MIN) yDirection =  1.0f;
+   if (yCurrent >= Y_MAX) yDirection = -1.0f;
+   
+   if (zCurrent <= Z_MIN) zDirection =  1.0f;
+   if (zCurrent >= Z_MAX) zDirection = -1.0f;
+
+   yCurrent += yFraction * yDirection * ellapsed;
+   zCurrent += zFraction * zDirection * ellapsed;
+
+   D3DXMatrixTranslation(m, 0, yCurrent, zCurrent);
+   //D3DXMatrixIdentity(m);
+}
+
+void ArrowModelClass::CalcRotateTransform(D3DXMATRIX *m)
+{
+    if (rCurrent <= R_MIN) rDirection =  1.0f;
+    if (rCurrent >= R_MAX) rDirection = -1.0f;
+
+    rCurrent += rFraction * rDirection * ellapsed;
+
+    D3DXMatrixRotationZ(m, D3DXToRadian(rCurrent));
+    //D3DXMatrixIdentity(m);
 }

@@ -29,7 +29,7 @@ TransformationClass::~TransformationClass()
 
 void TransformationClass::Initialize(HWND hwnd)
 {
-	m_screenDepth = 25.0f;
+	m_screenDepth = 100.0f;
 	m_screenNear = 1.0f;
 
 	//Obtain window dimensions from the haddle

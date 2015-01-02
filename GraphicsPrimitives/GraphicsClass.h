@@ -44,6 +44,14 @@ private:
 	//TriangleModelClass* m_Triangle;
 	ArrowModelClass* m_Arrow;
 	TrivialShaderClass* m_TrivialShader;
+
+    UINT lastRender;
+    UINT ellapsed;
+
+    float tCurrent;
+    float tFraction;
+    float tDirection;
+    void AdjustCamera();
 };
 
 #endif
