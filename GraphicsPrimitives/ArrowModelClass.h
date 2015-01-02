@@ -17,4 +17,8 @@ public:
 private:
 	bool InitializeBuffers(ID3D11Device*);
 	void RenderBuffers(ID3D11DeviceContext*);
+
+    D3DXMATRIX _staticRotation;
+    D3DXMATRIX _staticScale;
+   
 };

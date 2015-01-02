@@ -3,6 +3,7 @@
 
 ArrowModelClass::ArrowModelClass() :IndexModelClass()
 {
+    D3DXMatrixRotationZ(&_staticRotation, D3DXToRadian(-45.0f));
 }
 
 ArrowModelClass::~ArrowModelClass()
@@ -378,7 +379,7 @@ void ArrowModelClass::Render(ID3D11DeviceContext* deviceContext)
 	//D3DXMatrixRotationY(&rotMatrix, fAngle);
 	D3DXMatrixRotationY(&rotMatrix, fAngle);
 	//D3DXMatrixRotationAxis(&rotMatrix, 1.0f, 1.0f,1.0f, fAngle );
-	SetModelWorldMatrix(rotMatrix);
+    SetModelWorldMatrix(_staticRotation * rotMatrix);
 	//SetModelWorldMatrix(XMMatrixIdentity());
 
 	// Put the vertex and index buffers on the graphics pipeline to prepare them for drawing.
